@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="茶言觀色APP轉化策略方案 - 詳細轉化策略與執行方案">
+    <meta name="theme-color" content="#059669">
+    <title>茶言觀色 · APP轉化策略方案</title>
+    
+    <!-- Preconnect to external domains for performance -->
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Tailwind CSS with defer loading -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries" defer></script>
+    
+    <!-- Fonts with display=swap for better performance -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    
+    <!-- Fallback for fonts if JavaScript is disabled -->
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&display=swap" rel="stylesheet">
+    </noscript>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#059669",
+                        "background-light": "#f8fafc",
+                        "background-dark": "#020617",
+                        "slate": {
+                            "50": "#f8fafc",
+                            "100": "#f1f5f9",
+                            "200": "#e2e8f0",
+                            "300": "#cbd5e1",
+                            "400": "#94a3b8",
+                            "500": "#64748b",
+                            "600": "#475569",
+                            "700": "#334155",
+                            "800": "#1e293b",
+                            "900": "#0f172a",
+                            "950": "#020817",
+                        }
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "Noto Sans TC", "sans-serif"],
+                        "sans": ["Inter", "Noto Sans TC", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "0.75rem",
+                        "xl": "1rem",
+                        "full": "9999px"
+                    },
+                    boxShadow: {
+                        "soft": "0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+            letter-spacing: -0.011em;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(5, 150, 105, 0.1);
+        }
+        .dark .glass-card {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(5, 150, 105, 0.2);
+        }
+        
+        /* Focus styles for accessibility */
+        :focus-visible {
+            outline: 2px solid #059669;
+            outline-offset: 2px;
+            border-radius: 0.25rem;
+        }
+        
+        /* Smooth transitions */
+        .transition-all {
+            transition-property: all;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 200ms;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+    <div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+        <div class="layout-container flex h-full grow flex-col">
+            <!-- Header / Brand Title Area -->
+            <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-emerald-100 dark:border-emerald-900 px-6 py-4 lg:px-20 bg-white/50 dark:bg-black/20 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+                <div class="flex items-center gap-4">
+                    <div class="size-8 text-primary">
+                        <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_6_330)">
+                                <path clip-rule="evenodd" d="M24 0.757355L47.2426 24L24 47.2426L0.757355 24L24 0.757355ZM21 35.7574V12.2426L9.24264 24L21 35.7574Z" fill="currentColor" fill-rule="evenodd"></path>
+                            </g>
+                            <defs><clipPath id="clip0_6_330"><rect fill="white" height="48" width="48"></rect></clipPath></defs>
+                        </svg>
+                    </div>
+                    <h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-tight">茶言觀色 · APP轉化策略方案</h2>
+                </div>
+                <div class="flex flex-1 justify-end gap-8">
+                    <nav class="hidden md:flex items-center gap-9">
+                        <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="index.html">返回儀表板</a>
+                    </nav>
+                </div>
+            </header>
+
+            <main class="flex-1 px-4 lg:px-20 py-8 max-w-7xl mx-auto w-full">
+                <!-- Hero Section -->
+                <div class="flex flex-wrap justify-between gap-3 mb-8">
+                    <div class="flex flex-col gap-2">
+                        <h1 class="text-slate-900 dark:text-slate-100 text-4xl font-black leading-tight tracking-tight">APP轉化策略方案</h1>
+                        <p class="text-emerald-700 dark:text-emerald-400 text-lg font-normal">針對非APP會員的系統性轉化計劃</p>
+                    </div>
+                </div>
+
+                <!-- Key Statistics -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                    <div class="flex flex-col gap-2 rounded-xl p-6 border border-emerald-100 dark:border-emerald-900 bg-white dark:bg-emerald-950/20 shadow-soft">
+                        <p class="text-slate-500 dark:text-slate-400 text-sm font-medium">目標轉化會員數</p>
+                        <p class="text-slate-900 dark:text-slate-100 text-3xl font-bold">142 <span class="text-sm">人</span></p>
+                    </div>
+                    <div class="flex flex-col gap-2 rounded-xl p-6 border border-emerald-100 dark:border-emerald-900 bg-white dark:bg-emerald-950/20 shadow-soft">
+                        <p class="text-slate-500 dark:text-slate-400 text-sm font-medium">預期流失率降低</p>
+                        <p class="text-slate-900 dark:text-slate-100 text-3xl font-bold text-emerald-500">18.7%</p>
+                    </div>
+                    <div class="flex flex-col gap-2 rounded-xl p-6 border border-emerald-100 dark:border-emerald-900 bg-white dark:bg-emerald-950/20 shadow-soft">
+                        <p class="text-slate-500 dark:text-slate-400 text-sm font-medium">預估挽回會員</p>
+                        <p class="text-slate-900 dark:text-slate-100 text-3xl font-bold">26 <span class="text-sm">人</span></p>
+                    </div>
+                </div>
+
+                <!-- Strategy Overview -->
+                <div class="rounded-xl border border-emerald-100 dark:border-emerald-900 bg-white dark:bg-emerald-950/10 p-8 shadow-soft mb-8">
+                    <h2 class="text-slate-900 dark:text-slate-100 text-xl font-bold mb-6 flex items-center gap-2">
+                        <span class="material-symbols-outlined">strategy</span>
+                        策略概述
+                    </h2>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-6">
+                        根據數據分析，APP使用者的流失率（17.5%）顯著低於非APP使用者（36.2%）。本方案旨在通過系統性策略，將142位非APP會員轉化為APP使用者，預計可降低整體流失率，並挽回26位高價值會員。
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="p-4 rounded-lg bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-100 dark:border-emerald-800">
+                            <h4 class="font-bold text-emerald-700 dark:text-emerald-400 mb-2">核心目標</h4>
+                            <ul class="text-sm text-slate-600 dark:text-slate-400 space-y-1">
+                                <li class="flex items-start gap-2">
+                                    <span class="material-symbols-outlined text-emerald-500 text-sm">check_circle</span>
+                                    <span>3個月內轉化30%非APP會員</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="material-symbols-outlined text-emerald-500 text-sm">check_circle</span>
+                                    <span>降低整體流失率至22%以下</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="material-symbols-outlined text-emerald-500 text-sm">check_circle</span>
+                                    <span>提升APP月活躍用戶至200人以上</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="p-4 rounded-lg bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-100 dark:border-emerald-800">
+                            <h4 class="font-bold text-emerald-700 dark:text-emerald-400 mb-2">預期效益</h4>
+                            <ul class="text-sm text-slate-600 dark:text-slate-400 space-y-1">
+                                <li class="flex items-start gap-2">
+                                    <span class="material-symbols-outlined text-emerald-500 text-sm">check_circle</span>
+                                    <span>年度營收提升約MOP 84,000</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="material-symbols-outlined text-emerald-500 text-sm">check_circle</span>
+                                    <span>會員平均消費提升8-12%</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="material-symbols-outlined text-emerald-500 text-sm">check_circle</span>
+                                    <span>客戶滿意度提升15%</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detailed Strategy Sections -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                    <!-- Phase 1 -->
+                    <div class="rounded-xl border border-emerald-100 dark:border-emerald-900 bg-white dark:bg-emerald-950/10 p-6 shadow-soft">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="p-2 bg-emerald-100 dark:bg-emerald-900 rounded-lg">
+                                <span class="material-symbols-outlined text-emerald-700 dark:text-emerald-400">campaign</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100">第一階段：意識建立 (1-2週)</h3>
+                        </div>
+                        <ul class="space-y-3 text-sm text-slate-600 dark:text-slate-400">
+                            <li class="flex items-start gap-2">
+                                <span class="material-symbols-outlined text-emerald-500 text-sm">arrow_right</span>
+                                <span><strong>店內宣傳：</strong>在所有門店張貼APP下載QR code，提供首次下載優惠（85折券）</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="material-symbols-outlined text-emerald-500 text-sm">arrow_right</span>
+                                <span><strong>電子郵件行銷：</strong>向非APP會員發送專屬邀請，強調APP專屬優惠與便利功能</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="material-symbols-outlined text-emerald-500 text-sm">arrow_right</span>
+                                <span><strong>社群媒體推廣：</strong>透過FB/IG展示APP功能與用戶見證</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="material-symbols-outlined text-emerald-500 text-sm">arrow_right</span>
+                                <span><strong>員工訓練：</strong>培訓店員主動推薦APP下載與說明優惠</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Phase 2 -->
+                    <div class="rounded-xl border border-emerald-100 dark:border-emerald-900 bg-white dark:bg-emerald-950/10 p-6 shadow-soft">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="p-2 bg-emerald-100 dark:bg-emerald-900 rounded-lg">
+                                <span class="material-symbols-outlined text-emerald-700 dark:text-emerald-400">diversity_3</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100">第二階段：激勵轉化 (3-4週)</h3>
+                        </div>
+                        <ul class="space-y-3 text-sm text-slate-600 dark:text-slate-400">
+                            <li class="flex items-start gap-2">
+                                <span class="material-symbols-outlined text-emerald-500 text-sm">arrow_right</span>
+                                <span><strong>下載獎勵：</strong>首次下載即贈100點積分（可兌換MOP 20消費）</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="material-symbols-outlined text-emerald-500 text-sm">arrow_right</span>
+                                <span><strong>專屬優惠：</strong>APP用戶獨享「會員日」全品項9折優惠</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="material-symbols-outlined text-emerald-500 text-sm">arrow_right</span>
+                                <span><strong>推薦計劃：</strong>現有APP會員推薦新用戶，雙方各得50點積分</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="material-symbols-outlined text-emerald-500 text-sm">arrow_right</span>
+                                <span><strong>遊戲化互動：</strong>簽到集點、任務挑戰等增加使用黏著度</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Phase 3 -->
+                    <div class="rounded-xl border border-emerald-100 dark:border-emerald-900 bg-white dark:bg-emerald-950/10 p-6 shadow-soft">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="p-2 bg-emerald-100 dark:bg-emerald-900 rounded-lg">
+                                <span class="material-symbols-outlined text-emerald-700 dark:text-emerald-400">rocket_launch</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100">第三階段：深化使用 (5-8週)</h3>
+                        </div>
+                        <ul class="space-y-3 text-sm text-slate-600 dark:text-slate-400">
+                            <li class="flex items-start gap-2">
+                                <span class="material-symbols-outlined text-emerald-500 text-sm">arrow_right</span>
+                                <span><strong>個人化推薦：</strong>根據消費記錄推薦適合商品與優惠</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="material-symbols-outlined text-emerald-500 text-sm">arrow_right</span>
+                                <span><strong>預訂功能推廣：</strong>鼓勵使用APP預訂功能，節省等待時間</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="material-symbols-outlined text-emerald-500 text-sm">arrow_right</span>
+                                <span><strong>會員專屬內容：</strong>提供獨家食譜、茶飲知識等內容</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="material-symbols-outlined text-emerald-500 text-sm">arrow_right</span>
+                                <span><strong>滿意度調查：</strong>透過APP收集用戶反饋，持續優化體驗</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Implementation Timeline -->
+                <div class="rounded-xl border border-emerald-100 dark:border-emerald-900 bg-white dark:bg-emerald-950/10 p-8 shadow-soft mb-8">
+                    <h2 class="text-slate-900 dark:text-slate-100 text-xl font-bold mb-6 flex items-center gap-2">
+                        <span class="material-symbols-outlined">schedule</span>
+                        實施時間表
+                    </h2>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-slate-600 dark:text-slate-400">
+                            <thead class="text-xs text-emerald-700 dark:text-emerald-400 uppercase bg-emerald-50 dark:bg-emerald-900/30">
+                                <tr>
+                                    <th class="px-4 py-3 text-left">階段</th>
+                                    <th class="px-4 py-3 text-left">時間</th>
+                                    <th class="px-4 py-3 text-left">主要活動</th>
+                                    <th class="px-4 py-3 text-left">目標轉化率</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-emerald-100 dark:border-emerald-900">
+                                    <td class="px-4 py-3 font-medium">意識建立</td>
+                                    <td class="px-4 py-3">第1-2週</td>
+                                    <td class="px-4 py-3">店內宣傳、電子郵件行銷、員工訓練</td>
+                                    <td class="px-4 py-3">10-15%</td>
+                                </tr>
+                                <tr class="border-b border-emerald-100 dark:border-emerald-900">
+                                    <td class="px-4 py-3 font-medium">激勵轉化</td>
+                                    <td class="px-4 py-3">第3-4週</td>
+                                    <td class="px-4 py-3">下載獎勵、專屬優惠、推薦計劃</td>
+                                    <td class="px-4 py-3">累計30-40%</td>
+                                </tr>
+                                <tr class="border-b border-emerald-100 dark:border-emerald-900">
+                                    <td class="px-4 py-3 font-medium">深化使用</td>
+                                    <td class="px-4 py-3">第5-8週</td>
+                                    <td class="px-4 py-3">個人化推薦、預訂功能、會員內容</td>
+                                    <td class="px-4 py-3">累計50-60%</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 font-medium">持續優化</td>
+                                    <td class="px-4 py-3">第9-12週</td>
+                                    <td class="px-4 py-3">數據分析、策略調整、長期留存</td>
+                                    <td class="px-4 py-3">累計70%以上</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Success Metrics -->
+                <div class="rounded-xl border border-emerald-100 dark:border-emerald-900 bg-white dark:bg-emerald-950/10 p-8 shadow-soft">
+                    <h2 class="text-slate-900 dark:text-slate-100 text-xl font-bold mb-6 flex items-center gap-2">
+                        <span class="material-symbols-outlined">analytics</span>
+                        成功指標與追蹤
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div class="p-4 rounded-lg bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-100 dark:border-emerald-800">
+                            <p class="text-xs text-emerald-600 dark:text-emerald-400 mb-1">APP下載數</p>
+                            <p class="text-xl font-bold text-slate-900 dark:text-slate-100">85+</p>
+                            <p class="text-xs text-slate-500 dark:text-slate-400">3個月目標</p>
+                        </div>
+                        <div class="p-4 rounded-lg bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-100 dark:border-emerald-800">
+                            <p class="text-xs text-emerald-600 dark:text-emerald-400 mb-1">月活躍用戶</p>
+                            <p class="text-xl font-bold text-slate-900 dark:text-slate-100">200+</p>
+                            <p class="text-xs text-slate-500 dark:text-slate-400">提升至</p>
+                        </div>
+                        <div class="p-4 rounded-lg bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-100 dark:border-emerald-800">
+                            <p class="text-xs text-emerald-600 dark:text-emerald-400 mb-1">流失率降低</p>
+                            <p class="text-xl font-bold text-slate-900 dark:text-slate-100">18.7%</p>
+                            <p class="text-xs text-slate-500 dark:text-slate-400">36.2% → 17.5%</p>
+                        </div>
+                        <div class="p-4 rounded-lg bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-100 dark:border-emerald-800">
+                            <p class="text-xs text-emerald-600 dark:text-emerald-400 mb-1">營收提升</p>
+                            <p class="text-xl font-bold text-slate-900 dark:text-slate-100">MOP 84,000</p>
+                            <p class="text-xs text-slate-500 dark:text-slate-400">年度預估</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 p-4 rounded-lg bg-slate-50 dark:bg-slate-900/30 border border-slate-200 dark:border-slate-800">
+                        <h4 class="font-bold text-slate-700 dark:text-slate-300 mb-2">追蹤機制</h4>
+                        <ul class="text-sm text-slate-600 dark:text-slate-400 space-y-1">
+                            <li class="flex items-start gap-2">
+                                <span class="material-symbols-outlined text-emerald-500 text-sm">monitoring</span>
+                                <span>每週追蹤APP下載數與活躍用戶數據</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="material-symbols-outlined text-emerald-500 text-sm">monitoring</span>
+                                <span>每月分析轉化會員的消費行為變化</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="material-symbols-outlined text-emerald-500 text-sm">monitoring</span>
+                                <span>季度檢視整體流失率與營收影響</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="material-symbols-outlined text-emerald-500 text-sm">monitoring</span>
+                                <span>持續收集用戶反饋優化APP體驗</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Footer -->
+            <footer class="mt-12 border-t border-emerald-100 dark:border-emerald-900 bg-white/30 dark:bg-black/10 backdrop-blur-sm px-6 py-10 lg:px-20">
+                <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+                    <div class="flex flex-col gap-2">
+                        <div class="flex items-center gap-2 text-slate-900 dark:text-slate-100 font-bold">
+                            <span class="material-symbols-outlined text-primary">dashboard_customize</span>
+                            茶言觀色 · APP轉化策略方案
+                        </div>
+                        <p class="text-slate-500 text-xs italic">內部決策參考文件 · 版本：1.0 · 更新於：2023/12/01</p>
+                    </div>
+                    <div class="flex gap-6 text-sm text-slate-500 dark:text-slate-400">
+                        <a class="hover:text-primary transition-colors" href="index.html">返回儀表板</a>
+                        <a class="hover:text-primary transition-colors" href="#">下載PDF版本</a>
+                        <a class="hover:text-primary transition-colors" href="#">聯絡專案負責人</a>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add any interactive functionality here if needed
+            console.log('APP轉化策略方案頁面已載入');
+        });
+    </script>
+</body>
+</html>
