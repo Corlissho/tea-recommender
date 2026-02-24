@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>茶言觀色 · 會員活躍優化小工具</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&display=swap" rel="stylesheet">
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#059669",
+                        "background-light": "#f8fafc",
+                        "background-dark": "#020617",
+                        "slate": {
+                            "50": "#f8fafc",
+                            "100": "#f1f5f9",
+                            "200": "#e2e8f0",
+                            "300": "#cbd5e1",
+                            "400": "#94a3b8",
+                            "500": "#64748b",
+                            "600": "#475569",
+                            "700": "#334155",
+                            "800": "#1e293b",
+                            "900": "#0f172a",
+                            "950": "#020817",
+                        }
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "Noto Sans TC", "sans-serif"],
+                        "sans": ["Inter", "Noto Sans TC", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "0.75rem",
+                        "xl": "1rem",
+                        "full": "9999px"
+                    },
+                    boxShadow: {
+                        "soft": "0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+            letter-spacing: -0.011em;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(5, 150, 105, 0.1);
+        }
+        .dark .glass-card {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(5, 150, 105, 0.2);
+        }
+        .category-a {
+            border-color: #10b981;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%);
+        }
+        .category-b {
+            border-color: #f59e0b;
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(245, 158, 11, 0.05) 100%);
+        }
+        .category-c {
+            border-color: #ef4444;
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(239, 68, 68, 0.05) 100%);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+    <div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+        <div class="layout-container flex h-full grow flex-col">
+            <!-- Header / Brand Title Area -->
+            <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-emerald-100 dark:border-emerald-900 px-6 py-4 lg:px-20 bg-white/50 dark:bg-black/20 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+                <div class="flex items-center gap-4">
+                    <div class="size-8 text-primary">
+                        <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_6_330)">
+                                <path clip-rule="evenodd" d="M24 0.757355L47.2426 24L24 47.2426L0.757355 24L24 0.757355ZM21 35.7574V12.2426L9.24264 24L21 35.7574Z" fill="currentColor" fill-rule="evenodd"></path>
+                            </g>
+                            <defs><clipPath id="clip0_6_330"><rect fill="white" height="48" width="48"></rect></clipPath></defs>
+                        </svg>
+                    </div>
+                    <h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-tight">茶言觀色 · 會員活躍優化小工具</h2>
+                </div>
+                <div class="flex flex-1 justify-end gap-8">
+                    <nav class="hidden md:flex items-center gap-9">
+                        <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="#">儀表板</a>
+                        <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="#">數據分析</a>
+                        <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="#">模擬工具</a>
+                        <a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="#">決策參考</a>
+                    </nav>
+                </div>
+            </header>
+
+            <main class="flex-1 px-4 lg:px-20 py-8 max-w-7xl mx-auto w-full">
+                <!-- Hero Section -->
+                <div class="flex flex-wrap justify-between gap-3 mb-8">
+                    <div class="flex flex-col gap-2">
+                        <h1 class="text-slate-900 dark:text-slate-100 text-4xl font-black leading-tight tracking-tight">茶言觀色 · 會員活躍優化決策儀表板</h1>
+                        <p class="text-emerald-700 dark:text-emerald-400 text-lg font-normal">數據驅動的會員經營與 APP 轉化決策工具</p>
+                    </div>
+                </div>
+
+                <!-- Data Background Area - Key Metrics from PRD -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 mb-8">
+                    <div class="flex flex-col gap-2 rounded-xl p-6 border border-emerald-100 dark:border-emerald-900 bg-white dark:bg-emerald-950/20 shadow-soft">
+                        <p class="text-slate-500 dark:text-slate-400 text-sm font-medium">會員總數</p>
+                        <p class="text-slate-900 dark:text-slate-100 text-3xl font-bold">294</p>
+                    </div>
+                    <div class="flex flex-col gap-2 rounded-xl p-6 border border-emerald-100 dark:border-emerald-900 bg-white dark:bg-emerald-950/20 shadow-soft">
+                        <p class="text-slate-500 dark:text-slate-400 text-sm font-medium">平均半年消費</p>
+                        <p class="text-slate-900 dark:text-slate-100 text-3xl font-bold">4,022 <span class="text-sm">MOP</span></p>
+                    </div>
+                    <div class="flex flex-col gap-2 rounded-xl p-6 border border-emerald-100 dark:border-emerald-900 bg-white dark:bg-emerald-950/20 shadow-soft">
+                        <p class="text-slate-500 dark:text-slate-400 text-sm font-medium">平均半年來店</p>
+                        <p class="text-slate-900 dark:text-slate-100 text-3xl font-bold">8.14 <span class="text-sm">次</span></p>
+                    </div>
+                    <div class="flex flex-col gap-2 rounded-xl p-6 border border-emerald-100 dark:border-emerald-900 bg-white dark:bg-emerald-950/20 shadow-soft">
+                        <p class="text-slate-500 dark:text-slate-400 text-sm font-medium">整體流失率</p>
+                        <p class="text-slate-900 dark:text-slate-100 text-3xl font-bold text-red-500">25.8%</p>
+                    </div>
+                    <div class="flex flex-col gap-2 rounded-xl p-6 border border-emerald-100 dark:border-emerald-900 bg-white dark:bg-emerald-950/20 shadow-soft">
+                        <p class="text-slate-500 dark:text-slate-400 text-sm font-medium">APP 流失率</p>
+                        <p class="text-slate-900 dark:text-slate-100 text-3xl font-bold text-emerald-500">17.5%</p>
+                    </div>
+                    <div class="flex flex-col gap-2 rounded-xl p-6 border border-emerald-100 dark:border-emerald-900 bg-white dark:bg-emerald-950/20 shadow-soft">
+                        <p class="text-slate-500 dark:text-slate-400 text-sm font-medium">非 APP 流失率</p>
+                        <p class="text-slate-900 dark:text-slate-100 text-3xl font-bold text-red-600">36.2%</p>
+                    </div>
+                </div>
+
+                <!-- Data Insight Alert -->
+                <div class="mb-8">
+                    <div class="flex flex-col md:flex-row items-center justify-between gap-4 rounded-xl border border-primary/30 bg-primary/5 p-6 shadow-soft">
+                        <div class="flex items-center gap-4">
+                            <span class="material-symbols-outlined text-primary text-3xl">lightbulb</span>
+                            <div class="flex flex-col gap-1">
+                                <p class="text-slate-900 dark:text-slate-100 text-base font-bold">關鍵數據洞察</p>
+                                <p class="text-emerald-800 dark:text-emerald-300 text-base font-normal">APP 使用者流失率顯著較低，顯示數位互動有助提升會員黏著度。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    <!-- Left Column: Member Input and Classification -->
+                    <div class="lg:col-span-5 flex flex-col gap-6">
+                        <!-- Member Data Input Area -->
+                        <div class="rounded-xl border border-emerald-100 dark:border-emerald-900 bg-white dark:bg-emerald-950/10 p-6 shadow-soft">
+                            <h2 class="text-slate-900 dark:text-slate-100 text-xl font-bold mb-6 flex items-center gap-2">
+                                <span class="material-symbols-outlined">person_search</span>
+                                會員資料輸入
+                            </h2>
+                            <form id="memberForm" class="flex flex-col gap-5">
+                                <div class="flex flex-col gap-2">
+                                    <label class="text-sm font-medium text-slate-700 dark:text-slate-300">最近一次來店距離（天）</label>
+                                    <input id="lastVisitDays" class="rounded-lg border-emerald-200 dark:border-emerald-800 bg-slate-50 dark:bg-slate-900 focus:border-primary focus:ring-primary p-3" placeholder="例如: 15" type="number" min="0" value="15">
+                                </div>
+                                <div class="flex flex-col gap-2">
+                                    <label class="text-sm font-medium text-slate-700 dark:text-slate-300">半年來店次數</label>
+                                    <input id="halfYearVisits" class="rounded-lg border-emerald-200 dark:border-emerald-800 bg-slate-50 dark:bg-slate-900 focus:border-primary focus:ring-primary p-3" placeholder="例如: 8" type="number" min="0" value="8">
+                                </div>
+                                <div class="flex flex-col gap-2">
+                                    <label class="text-sm font-medium text-slate-700 dark:text-slate-300">半年總消費金額 (MOP)</label>
+                                    <input id="halfYearSpending" class="rounded-lg border-emerald-200 dark:border-emerald-800 bg-slate-50 dark:bg-slate-900 focus:border-primary focus:ring-primary p-3" placeholder="例如: 3500" type="number" min="0" value="3500">
+                                </div>
+                                <div class="flex flex-col gap-2">
+                                    <label class="text-sm font-medium text-slate-700 dark:text-slate-300">是否為 APP 使用者</label>
+                                    <select id="appUser" class="rounded-lg border-emerald-200 dark:border-emerald-800 bg-slate-50 dark:bg-slate-900 focus:border-primary focus:ring-primary p-3">
+                                        <option value="yes">是 (Yes)</option>
+                                        <option value="no" selected>否 (No)</option>
+                                    </select>
+                                </div>
+                                <button id="analyzeBtn" class="mt-2 w-full bg-primary hover:bg-primary/90 text-slate-950 font-bold py-3 rounded-lg transition-all shadow-md shadow-primary/20 flex items-center justify-center gap-2" type="button">
+                                    <span class="material-symbols-outlined">analytics</span>
+                                    分析會員狀態
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Classification Results Display Area -->
+                        <div id="classificationResult" class="rounded-xl border border-primary/20 bg-emerald-50 dark:bg-emerald-950/30 p-6 shadow-soft hidden">
+                            <div class="flex items-center justify-between mb-4">
+                                <span id="memberCategoryBadge" class="px-3 py-1 bg-primary text-slate-950 text-xs font-bold rounded-full">分析結果</span>
+                                <span id="memberCategoryIcon" class="material-symbols-outlined text-primary">check_circle</span>
+                            </div>
+                            <h3 id="memberCategoryTitle" class="text-slate-900 dark:text-slate-100 font-bold text-lg mb-2">會員分類</h3>
+                            <p id="memberCategoryDescription" class="text-slate-600 dark:text-slate-400 text-sm mb-4 leading-relaxed">
+                                會員分類描述將顯示在這裡。
+                            </p>
+                            <div id="strategyRecommendations" class="space-y-2">
+                                <!-- Strategy recommendations will be inserted here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Visualization and Simulation -->
+                    <div class="lg:col-span-7 flex flex-col gap-6">
+                        <!-- Member Type Proportion Visualization -->
+                        <div class="rounded-xl border border-emerald-100 dark:border-emerald-900 bg-white dark:bg-emerald-950/10 p-6 shadow-soft">
+                            <h2 class="text-slate-900 dark:text-slate-100 text-xl font-bold mb-6 flex items-center gap-2">
+                                <span class="material-symbols-outlined">pie_chart</span>
+                                會員類型佔比及營收貢獻
+                            </h2>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                                <div class="category-a rounded-lg p-4 border">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <h4 class="font-bold text-emerald-700 dark:text-emerald-400">A級會員</h4>
+                                        <span class="text-xs font-bold bg-emerald-100 dark:bg-emerald-900 text-emerald-800 dark:text-emerald-300 px-2 py-1 rounded">高價值</span>
+                                    </div>
+                                    <p class="text-2xl font-bold text-slate-900 dark:text-slate-100">35%</p>
+                                    <p class="text-sm text-slate-500 dark:text-slate-400">營收貢獻: 62%</p>
+                                </div>
+                                <div class="category-b rounded-lg p-4 border">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <h4 class="font-bold text-amber-700 dark:text-amber-400">B級會員</h4>
+                                        <span class="text-xs font-bold bg-amber-100 dark:bg-amber-900 text-amber-800 dark:text-amber-300 px-2 py-1 rounded">潛力成長</span>
+                                    </div>
+                                    <p class="text-2xl font-bold text-slate-900 dark:text-slate-100">45%</p>
+                                    <p class="text-sm text-slate-500 dark:text-slate-400">營收貢獻: 30%</p>
+                                </div>
+                                <div class="category-c rounded-lg p-4 border">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <h4 class="font-bold text-red-700 dark:text-red-400">C級會員</h4>
+                                        <span class="text-xs font-bold bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-300 px-2 py-1 rounded">沉睡風險</span>
+                                    </div>
+                                    <p class="text-2xl font-bold text-slate-900 dark:text-slate-100">20%</p>
+                                    <p class="text-sm text-slate-500 dark:text-slate-400">營收貢獻: 8%</p>
+                                </div>
+                            </div>
+                            <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="p-4 rounded-lg bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-100 dark:border-emerald-800">
+                                    <p class="text-xs text-emerald-600 dark:text-emerald-400 mb-1">平均每人貢獻提升</p>
+                                    <p class="text-xl font-bold text-slate-900 dark:text-slate-100">MOP 804</p>
+                                </div>
+                                <div class="p-4 rounded-lg bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-100 dark:border-emerald-800">
+                                    <p class="text-xs text-emerald-600 dark:text-emerald-400 mb-1">預估年度成長率</p>
+                                    <p class="text-xl font-bold text-slate-900 dark:text-slate-100">14.2%</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- APP Conversion Impact Analysis -->
+                        <div class="rounded-xl border border-emerald-100 dark:border-emerald-900 bg-white dark:bg-emerald-950/10 p-8 shadow-soft">
+                            <h2 class="text-slate-900 dark:text-slate-100 text-xl font-bold mb-6 flex items-center gap-2">
+                                <span class="material-symbols-outlined">app_promo</span>
+                                APP 轉化影響分析
+                            </h2>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                                <div class="relative h-48 w-48 mx-auto">
+                                    <!-- Simple CSS Donut Chart Mock -->
+                                    <div class="absolute inset-0 rounded-full border-[16px] border-red-500/20"></div>
+                                    <div class="absolute inset-0 rounded-full border-[16px] border-primary border-t-transparent border-r-transparent rotate-45"></div>
+                                    <div class="absolute inset-0 flex flex-col items-center justify-center">
+                                        <p class="text-3xl font-black text-slate-900 dark:text-slate-100">4,022 <span class="text-sm">MOP</span></p>
+                                        <p class="text-[10px] uppercase tracking-widest text-slate-500">流失降低潛力</p>
+                                    </div>
+                                </div>
+                                <div class="space-y-4">
+                                    <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100">若非 APP 會員成功轉化...</h3>
+                                    <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                                        根據現有數據，APP 使用者的流失率僅為非使用者的 <span class="text-primary font-bold">48%</span>。
+                                        將現有 142 位非 APP 會員轉化後，預計可挽回約 <span class="text-primary font-bold">26 位</span> 即將流失的高價值顧客。
+                                    </p>
+                                    <button class="text-sm font-bold py-2 px-4 border border-primary text-primary rounded-lg hover:bg-primary hover:text-slate-950 transition-all">
+                                        制定轉化策略方案
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Growth Drivers Visualization -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="rounded-xl p-6 bg-gradient-to-br from-primary/20 to-transparent border border-primary/10 shadow-soft">
+                                <div class="flex items-center gap-3 mb-4">
+                                    <div class="p-2 bg-white dark:bg-slate-900 rounded-lg shadow-sm">
+                                        <span class="material-symbols-outlined text-primary">group_add</span>
+                                    </div>
+                                    <h4 class="font-bold">拉新動能</h4>
+                                </div>
+                                <p class="text-sm text-slate-600 dark:text-slate-400">目前月均新增會員 12 人，轉化率穩定維持在 4.2%。</p>
+                            </div>
+                            <div class="rounded-xl p-6 bg-gradient-to-br from-emerald-400/20 to-transparent border border-emerald-400/10 shadow-soft">
+                                <div class="flex items-center gap-3 mb-4">
+                                    <div class="p-2 bg-white dark:bg-slate-900 rounded-lg shadow-sm">
+                                        <span class="material-symbols-outlined text-emerald-500">volunteer_activism</span>
+                                    </div>
+                                    <h4 class="font-bold">留存動能</h4>
+                                </div>
+                                <p class="text-sm text-slate-600 dark:text-slate-400">APP 推播開啟率 68%，是維持留存的主要管道。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Footer -->
+            <footer class="mt-12 border-t border-emerald-100 dark:border-emerald-900 bg-white/30 dark:bg-black/10 backdrop-blur-sm px-6 py-10 lg:px-20">
+                <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+                    <div class="flex flex-col gap-2">
+                        <div class="flex items-center gap-2 text-slate-900 dark:text-slate-100 font-bold">
+                            <span class="material-symbols-outlined text-primary">dashboard_customize</span>
+                            茶言觀色 · 會員活躍優化小工具
+                        </div>
+                        <p class="text-slate-500 text-xs italic">內部決策參考工具 · 數據更新於：2023/12/01</p>
+                    </div>
+                    <div class="flex gap-6 text-sm text-slate-500 dark:text-slate-400">
+                        <a class="hover:text-primary transition-colors" href="#">隱私權政策</a>
+                        <a class="hover:text-primary transition-colors" href="#">數據安全聲明</a>
+                        <a class="hover:text-primary transition-colors" href="#">系統說明文件</a>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const analyzeBtn = document.getElementById('analyzeBtn');
+            const classificationResult = document.getElementById('classificationResult');
+            const memberCategoryBadge = document.getElementById('memberCategoryBadge');
+            const memberCategoryIcon = document.getElementById('memberCategoryIcon');
+            const memberCategoryTitle = document.getElementById('memberCategoryTitle');
+            const memberCategoryDescription = document.getElementById('memberCategoryDescription');
+            const strategyRecommendations = document.getElementById('strategyRecommendations');
+
+            analyzeBtn.addEventListener('click', function() {
+                // Get form values
+                const lastVisitDays = parseInt(document.getElementById('lastVisitDays').value) || 0;
+                const halfYearVisits = parseInt(document.getElementById('halfYearVisits').value) || 0;
+                const halfYearSpending = parseInt(document.getElementById('halfYearSpending').value) || 0;
+                const isAppUser = document.getElementById('appUser').value === 'yes';
+
+                // Classification logic based on PRD
+                let category = '';
+                let badgeColor = '';
+                let icon = '';
+                let title = '';
+                let description = '';
+                let strategies = [];
+
+                if (halfYearSpending >= 6000 && halfYearVisits >= 10 && lastVisitDays <= 30) {
+                    category = 'A級會員';
+                    badgeColor = 'bg-emerald-500';
+                    icon = 'star';
+                    title = 'A級會員 · 核心高價值會員';
+                    description = '此會員為品牌核心資產，消費力強、來店頻率高，且近期活躍。建議優先維護關係，提供專屬優惠與 VIP 服務。';
+                    strategies = [
+                        '每月專屬禮遇（如新品試飲券、生日禮）',
+                        '邀請參與新品品鑑會或會員專屬活動',
+                        '提供高價值積分兌換選項'
+                    ];
+                } else if (halfYearSpending >= 2000 && halfYearVisits >= 5 && lastVisitDays <= 60) {
+                    category = 'B級會員';
+                    badgeColor = 'bg-amber-500';
+                    icon = 'trending_up';
+                    title = 'B級會員 · 潛力成長會員';
+                    description = '此會員具備成長潛力，消費與來店次數中等，可透過適當激勵提升至 A 級。';
+                    strategies = [
+                        '推送「滿額贈」或「來店禮」促銷',
+                        'APP 推播提醒近期優惠活動',
+                        '提供消費累積升級方案'
+                    ];
+                } else {
+                    category = 'C級會員';
+                    badgeColor = 'bg-red-500';
+                    icon = 'warning';
+                    title = 'C級會員 · 沉睡風險會員';
+                    description = '此會員近期活躍度低，有流失風險。建議啟動喚醒策略，避免完全流失。';
+                    strategies = [
+                        '發送「好久不見」優惠券（如 85 折回店禮）',
+                        '透過簡訊或 APP 推播提醒會員權益',
+                        '調查流失原因（問卷或電話訪談）'
+                    ];
+                }
+
+                // Apply APP user adjustment
+                if (isAppUser) {
+                    description += ' 此會員為 APP 使用者，流失風險較低，可透過數位管道加強互動。';
+                    strategies.push('加強 APP 推播與個人化內容推薦');
+                } else {
+                    description += ' 此會員非 APP 使用者，建議引導下載 APP 以降低流失率。';
+                    strategies.push('引導下載 APP 並提供首次下載優惠');
+                }
+
+                // Update UI
+                memberCategoryBadge.textContent = category;
+                memberCategoryBadge.className = `px-3 py-1 ${badgeColor} text-slate-950 text-xs font-bold rounded-full`;
+                memberCategoryIcon.textContent = icon;
+                memberCategoryTitle.textContent = title;
+                memberCategoryDescription.textContent = description;
+
+                // Clear and add strategy recommendations
+                strategyRecommendations.innerHTML = '';
+                strategies.forEach(strategy => {
+                    const strategyItem = document.createElement('div');
+                    strategyItem.className = 'flex items-center gap-2 text-xs text-emerald-700 dark:text-emerald-400';
+                    strategyItem.innerHTML = `
+                        <span class="material-symbols-outlined text-sm">check_circle</span>
+                        <span>${strategy}</span>
+                    `;
+                    strategyRecommendations.appendChild(strategyItem);
+                });
+
+                // Show results
+                classificationResult.classList.remove('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
