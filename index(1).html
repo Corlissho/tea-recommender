@@ -3,10 +3,32 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="茶言觀色會員活躍優化小工具 - 數據驅動的會員經營與 APP 轉化決策工具">
+    <meta name="theme-color" content="#059669">
     <title>茶言觀色 · 會員活躍優化小工具</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&display=swap" rel="stylesheet">
+    
+    <!-- Preconnect to external domains for performance -->
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- PWA manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <!-- Tailwind CSS with defer loading -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries" defer></script>
+    
+    <!-- Fonts with display=swap for better performance -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    
+    <!-- Fallback for fonts if JavaScript is disabled -->
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&display=swap" rel="stylesheet">
+    </noscript>
     <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -51,6 +73,8 @@
         body {
             font-family: 'Inter', 'Noto Sans TC', sans-serif;
             letter-spacing: -0.011em;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
         .glass-card {
             background: rgba(255, 255, 255, 0.7);
@@ -72,6 +96,75 @@
         .category-c {
             border-color: #ef4444;
             background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(239, 68, 68, 0.05) 100%);
+        }
+        
+        /* Improved responsive design */
+        @media (max-width: 768px) {
+            .layout-container {
+                padding-left: 0.5rem;
+                padding-right: 0.5rem;
+            }
+            
+            header {
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+            
+            main {
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+            
+            .text-4xl {
+                font-size: 1.875rem !important;
+                line-height: 2.25rem !important;
+            }
+            
+            .grid-cols-6 {
+                grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .grid-cols-6 {
+                grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+            }
+            
+            .text-3xl {
+                font-size: 1.5rem !important;
+                line-height: 2rem !important;
+            }
+        }
+        
+        /* Focus styles for accessibility */
+        :focus-visible {
+            outline: 2px solid #059669;
+            outline-offset: 2px;
+            border-radius: 0.25rem;
+        }
+        
+        /* Smooth transitions */
+        .transition-all {
+            transition-property: all;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 200ms;
+        }
+        
+        /* Print styles */
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            
+            body {
+                background: white !important;
+                color: black !important;
+            }
+            
+            .glass-card, .shadow-soft {
+                box-shadow: none !important;
+                border: 1px solid #ddd !important;
+            }
         }
     </style>
 </head>
@@ -162,16 +255,19 @@
                             </h2>
                             <form id="memberForm" class="flex flex-col gap-5">
                                 <div class="flex flex-col gap-2">
-                                    <label class="text-sm font-medium text-slate-700 dark:text-slate-300">最近一次來店距離（天）</label>
-                                    <input id="lastVisitDays" class="rounded-lg border-emerald-200 dark:border-emerald-800 bg-slate-50 dark:bg-slate-900 focus:border-primary focus:ring-primary p-3" placeholder="例如: 15" type="number" min="0" value="15">
+                                    <label for="lastVisitDays" class="text-sm font-medium text-slate-700 dark:text-slate-300">最近一次來店距離（天）</label>
+                                    <input id="lastVisitDays" class="rounded-lg border-emerald-200 dark:border-emerald-800 bg-slate-50 dark:bg-slate-900 focus:border-primary focus:ring-primary p-3" placeholder="例如: 15" type="number" min="0" max="365" value="15" required>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400">請輸入 0-365 之間的天數</p>
                                 </div>
                                 <div class="flex flex-col gap-2">
-                                    <label class="text-sm font-medium text-slate-700 dark:text-slate-300">半年來店次數</label>
-                                    <input id="halfYearVisits" class="rounded-lg border-emerald-200 dark:border-emerald-800 bg-slate-50 dark:bg-slate-900 focus:border-primary focus:ring-primary p-3" placeholder="例如: 8" type="number" min="0" value="8">
+                                    <label for="halfYearVisits" class="text-sm font-medium text-slate-700 dark:text-slate-300">半年來店次數</label>
+                                    <input id="halfYearVisits" class="rounded-lg border-emerald-200 dark:border-emerald-800 bg-slate-50 dark:bg-slate-900 focus:border-primary focus:ring-primary p-3" placeholder="例如: 8" type="number" min="0" max="100" value="8" required>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400">請輸入 0-100 之間的次數</p>
                                 </div>
                                 <div class="flex flex-col gap-2">
-                                    <label class="text-sm font-medium text-slate-700 dark:text-slate-300">半年總消費金額 (MOP)</label>
-                                    <input id="halfYearSpending" class="rounded-lg border-emerald-200 dark:border-emerald-800 bg-slate-50 dark:bg-slate-900 focus:border-primary focus:ring-primary p-3" placeholder="例如: 3500" type="number" min="0" value="3500">
+                                    <label for="halfYearSpending" class="text-sm font-medium text-slate-700 dark:text-slate-300">半年總消費金額 (MOP)</label>
+                                    <input id="halfYearSpending" class="rounded-lg border-emerald-200 dark:border-emerald-800 bg-slate-50 dark:bg-slate-900 focus:border-primary focus:ring-primary p-3" placeholder="例如: 3500" type="number" min="0" max="100000" value="3500" required>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400">請輸入 0-100,000 之間的金額</p>
                                 </div>
                                 <div class="flex flex-col gap-2">
                                     <label class="text-sm font-medium text-slate-700 dark:text-slate-300">是否為 APP 使用者</label>
@@ -180,10 +276,25 @@
                                         <option value="no" selected>否 (No)</option>
                                     </select>
                                 </div>
-                                <button id="analyzeBtn" class="mt-2 w-full bg-primary hover:bg-primary/90 text-slate-950 font-bold py-3 rounded-lg transition-all shadow-md shadow-primary/20 flex items-center justify-center gap-2" type="button">
-                                    <span class="material-symbols-outlined">analytics</span>
-                                    分析會員狀態
-                                </button>
+                                <div class="flex flex-col gap-3 mt-2">
+                                    <button id="analyzeBtn" class="w-full bg-primary hover:bg-primary/90 text-slate-950 font-bold py-3 rounded-lg transition-all shadow-md shadow-primary/20 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed" type="button" aria-label="分析會員狀態">
+                                        <span id="analyzeIcon" class="material-symbols-outlined">analytics</span>
+                                        <span id="analyzeText">分析會員狀態</span>
+                                        <span id="analyzeSpinner" class="hidden animate-spin rounded-full h-5 w-5 border-2 border-slate-950 border-t-transparent"></span>
+                                    </button>
+                                    
+                                    <div class="flex gap-2">
+                                        <button type="button" class="flex-1 py-2 px-3 text-xs border border-emerald-300 text-emerald-700 dark:text-emerald-300 rounded-lg hover:bg-emerald-50 dark:hover:bg-emerald-900/30 transition-colors example-btn" data-type="a">
+                                            A級示例
+                                        </button>
+                                        <button type="button" class="flex-1 py-2 px-3 text-xs border border-amber-300 text-amber-700 dark:text-amber-300 rounded-lg hover:bg-amber-50 dark:hover:bg-amber-900/30 transition-colors example-btn" data-type="b">
+                                            B級示例
+                                        </button>
+                                        <button type="button" class="flex-1 py-2 px-3 text-xs border border-red-300 text-red-700 dark:text-red-300 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/30 transition-colors example-btn" data-type="c">
+                                            C級示例
+                                        </button>
+                                    </div>
+                                </div>
                             </form>
                         </div>
 
@@ -333,86 +444,265 @@
             const memberCategoryDescription = document.getElementById('memberCategoryDescription');
             const strategyRecommendations = document.getElementById('strategyRecommendations');
 
-            analyzeBtn.addEventListener('click', function() {
-                // Get form values
-                const lastVisitDays = parseInt(document.getElementById('lastVisitDays').value) || 0;
-                const halfYearVisits = parseInt(document.getElementById('halfYearVisits').value) || 0;
-                const halfYearSpending = parseInt(document.getElementById('halfYearSpending').value) || 0;
-                const isAppUser = document.getElementById('appUser').value === 'yes';
+            // Get UI elements for loading state
+            const analyzeIcon = document.getElementById('analyzeIcon');
+            const analyzeText = document.getElementById('analyzeText');
+            const analyzeSpinner = document.getElementById('analyzeSpinner');
+            
+            analyzeBtn.addEventListener('click', async function() {
+                // Show loading state
+                analyzeBtn.disabled = true;
+                analyzeIcon.classList.add('hidden');
+                analyzeText.textContent = '分析中...';
+                analyzeSpinner.classList.remove('hidden');
+                
+                // Small delay to show loading state (simulate processing)
+                await new Promise(resolve => setTimeout(resolve, 500));
+                
+                try {
+                    // Get form values with validation
+                    const lastVisitDaysInput = document.getElementById('lastVisitDays');
+                    const halfYearVisitsInput = document.getElementById('halfYearVisits');
+                    const halfYearSpendingInput = document.getElementById('halfYearSpending');
+                    
+                    // Validate inputs
+                    if (!lastVisitDaysInput.checkValidity() || !halfYearVisitsInput.checkValidity() || !halfYearSpendingInput.checkValidity()) {
+                        throw new Error('請檢查輸入資料，確保所有欄位都填寫正確！');
+                    }
+                    
+                    const lastVisitDays = parseInt(lastVisitDaysInput.value) || 0;
+                    const halfYearVisits = parseInt(halfYearVisitsInput.value) || 0;
+                    const halfYearSpending = parseInt(halfYearSpendingInput.value) || 0;
+                    const isAppUser = document.getElementById('appUser').value === 'yes';
 
-                // Classification logic based on PRD
-                let category = '';
-                let badgeColor = '';
-                let icon = '';
-                let title = '';
-                let description = '';
-                let strategies = [];
+                    // Enhanced classification logic with scoring system
+                    let score = 0;
+                    
+                    // Scoring based on spending
+                    if (halfYearSpending >= 6000) score += 3;
+                    else if (halfYearSpending >= 4000) score += 2;
+                    else if (halfYearSpending >= 2000) score += 1;
+                    
+                    // Scoring based on visit frequency
+                    if (halfYearVisits >= 10) score += 3;
+                    else if (halfYearVisits >= 7) score += 2;
+                    else if (halfYearVisits >= 5) score += 1;
+                    
+                    // Scoring based on recency
+                    if (lastVisitDays <= 15) score += 3;
+                    else if (lastVisitDays <= 30) score += 2;
+                    else if (lastVisitDays <= 60) score += 1;
+                    
+                    // Bonus for APP users
+                    if (isAppUser) score += 1;
+                    
+                    // Ensure score is within 0-10 range
+                    score = Math.min(Math.max(score, 0), 10);
+                    
+                    // Classification based on total score
+                    let category = '';
+                    let badgeColor = '';
+                    let icon = '';
+                    let title = '';
+                    let description = '';
+                    let strategies = [];
 
-                if (halfYearSpending >= 6000 && halfYearVisits >= 10 && lastVisitDays <= 30) {
-                    category = 'A級會員';
-                    badgeColor = 'bg-emerald-500';
-                    icon = 'star';
-                    title = 'A級會員 · 核心高價值會員';
-                    description = '此會員為品牌核心資產，消費力強、來店頻率高，且近期活躍。建議優先維護關係，提供專屬優惠與 VIP 服務。';
-                    strategies = [
-                        '每月專屬禮遇（如新品試飲券、生日禮）',
-                        '邀請參與新品品鑑會或會員專屬活動',
-                        '提供高價值積分兌換選項'
-                    ];
-                } else if (halfYearSpending >= 2000 && halfYearVisits >= 5 && lastVisitDays <= 60) {
-                    category = 'B級會員';
-                    badgeColor = 'bg-amber-500';
-                    icon = 'trending_up';
-                    title = 'B級會員 · 潛力成長會員';
-                    description = '此會員具備成長潛力，消費與來店次數中等，可透過適當激勵提升至 A 級。';
-                    strategies = [
-                        '推送「滿額贈」或「來店禮」促銷',
-                        'APP 推播提醒近期優惠活動',
-                        '提供消費累積升級方案'
-                    ];
-                } else {
-                    category = 'C級會員';
-                    badgeColor = 'bg-red-500';
-                    icon = 'warning';
-                    title = 'C級會員 · 沉睡風險會員';
-                    description = '此會員近期活躍度低，有流失風險。建議啟動喚醒策略，避免完全流失。';
-                    strategies = [
-                        '發送「好久不見」優惠券（如 85 折回店禮）',
-                        '透過簡訊或 APP 推播提醒會員權益',
-                        '調查流失原因（問卷或電話訪談）'
-                    ];
+                    if (score >= 8) {
+                        category = 'A級會員';
+                        badgeColor = 'bg-emerald-500';
+                        icon = 'star';
+                        title = 'A級會員 · 核心高價值會員';
+                        description = '此會員為品牌核心資產，消費力強、來店頻率高，且近期活躍。建議優先維護關係，提供專屬優惠與 VIP 服務。';
+                        strategies = [
+                            '每月專屬禮遇（如新品試飲券、生日禮）',
+                            '邀請參與新品品鑑會或會員專屬活動',
+                            '提供高價值積分兌換選項',
+                            '專屬客服通道與快速服務'
+                        ];
+                    } else if (score >= 5) {
+                        category = 'B級會員';
+                        badgeColor = 'bg-amber-500';
+                        icon = 'trending_up';
+                        title = 'B級會員 · 潛力成長會員';
+                        description = '此會員具備成長潛力，消費與來店次數中等，可透過適當激勵提升至 A 級。';
+                        strategies = [
+                            '推送「滿額贈」或「來店禮」促銷',
+                            'APP 推播提醒近期優惠活動',
+                            '提供消費累積升級方案',
+                            '推薦朋友獎勵計劃'
+                        ];
+                    } else {
+                        category = 'C級會員';
+                        badgeColor = 'bg-red-500';
+                        icon = 'warning';
+                        title = 'C級會員 · 沉睡風險會員';
+                        description = '此會員近期活躍度低，有流失風險。建議啟動喚醒策略，避免完全流失。';
+                        strategies = [
+                            '發送「好久不見」優惠券（如 85 折回店禮）',
+                            '透過簡訊或 APP 推播提醒會員權益',
+                            '調查流失原因（問卷或電話訪談）',
+                            '限時回歸獎勵活動'
+                        ];
+                    }
+
+                    // Apply APP user adjustment
+                    if (isAppUser) {
+                        description += ' 此會員為 APP 使用者，流失風險較低，可透過數位管道加強互動。';
+                        strategies.push('加強 APP 推播與個人化內容推薦');
+                    } else {
+                        description += ' 此會員非 APP 使用者，建議引導下載 APP 以降低流失率。';
+                        strategies.push('引導下載 APP 並提供首次下載優惠');
+                    }
+
+                    // Add score information
+                    description += ` (綜合評分: ${score}/10)`;
+
+                    // Update UI
+                    memberCategoryBadge.textContent = category;
+                    memberCategoryBadge.className = `px-3 py-1 ${badgeColor} text-slate-950 text-xs font-bold rounded-full`;
+                    memberCategoryIcon.textContent = icon;
+                    memberCategoryTitle.textContent = title;
+                    memberCategoryDescription.textContent = description;
+
+                    // Clear and add strategy recommendations
+                    strategyRecommendations.innerHTML = '';
+                    strategies.forEach(strategy => {
+                        const strategyItem = document.createElement('div');
+                        strategyItem.className = 'flex items-center gap-2 text-xs text-emerald-700 dark:text-emerald-400 mb-2';
+                        strategyItem.innerHTML = `
+                            <span class="material-symbols-outlined text-sm">check_circle</span>
+                            <span class="flex-1">${strategy}</span>
+                        `;
+                        strategyRecommendations.appendChild(strategyItem);
+                    });
+
+                    // Show results with animation
+                    classificationResult.classList.remove('hidden');
+                    classificationResult.style.opacity = '0';
+                    classificationResult.style.transform = 'translateY(10px)';
+                    
+                    setTimeout(() => {
+                        classificationResult.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                        classificationResult.style.opacity = '1';
+                        classificationResult.style.transform = 'translateY(0)';
+                    }, 10);
+                    
+                    // Scroll to results for better UX
+                    classificationResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    
+                } catch (error) {
+                    // Show error message
+                    alert(error.message);
+                    console.error('分析錯誤:', error);
+                } finally {
+                    // Reset loading state
+                    analyzeBtn.disabled = false;
+                    analyzeIcon.classList.remove('hidden');
+                    analyzeText.textContent = '分析會員狀態';
+                    analyzeSpinner.classList.add('hidden');
                 }
-
-                // Apply APP user adjustment
-                if (isAppUser) {
-                    description += ' 此會員為 APP 使用者，流失風險較低，可透過數位管道加強互動。';
-                    strategies.push('加強 APP 推播與個人化內容推薦');
-                } else {
-                    description += ' 此會員非 APP 使用者，建議引導下載 APP 以降低流失率。';
-                    strategies.push('引導下載 APP 並提供首次下載優惠');
+            });
+            
+            // Add keyboard shortcut (Enter key in form)
+            document.getElementById('memberForm').addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    analyzeBtn.click();
                 }
-
-                // Update UI
-                memberCategoryBadge.textContent = category;
-                memberCategoryBadge.className = `px-3 py-1 ${badgeColor} text-slate-950 text-xs font-bold rounded-full`;
-                memberCategoryIcon.textContent = icon;
-                memberCategoryTitle.textContent = title;
-                memberCategoryDescription.textContent = description;
-
-                // Clear and add strategy recommendations
-                strategyRecommendations.innerHTML = '';
-                strategies.forEach(strategy => {
-                    const strategyItem = document.createElement('div');
-                    strategyItem.className = 'flex items-center gap-2 text-xs text-emerald-700 dark:text-emerald-400';
-                    strategyItem.innerHTML = `
-                        <span class="material-symbols-outlined text-sm">check_circle</span>
-                        <span>${strategy}</span>
-                    `;
-                    strategyRecommendations.appendChild(strategyItem);
+            });
+            
+            // Add input validation feedback
+            const inputs = document.querySelectorAll('#memberForm input, #memberForm select');
+            inputs.forEach(input => {
+                input.addEventListener('input', function() {
+                    if (this.checkValidity()) {
+                        this.classList.remove('border-red-300');
+                        this.classList.add('border-emerald-200');
+                    } else {
+                        this.classList.remove('border-emerald-200');
+                        this.classList.add('border-red-300');
+                    }
                 });
-
-                // Show results
-                classificationResult.classList.remove('hidden');
+            });
+            
+            // Example data buttons functionality
+            document.querySelectorAll('.example-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const type = this.getAttribute('data-type');
+                    
+                    // Set example data based on type
+                    switch(type) {
+                        case 'a':
+                            document.getElementById('lastVisitDays').value = '7';
+                            document.getElementById('halfYearVisits').value = '12';
+                            document.getElementById('halfYearSpending').value = '7500';
+                            document.getElementById('appUser').value = 'yes';
+                            break;
+                        case 'b':
+                            document.getElementById('lastVisitDays').value = '20';
+                            document.getElementById('halfYearVisits').value = '7';
+                            document.getElementById('halfYearSpending').value = '4500';
+                            document.getElementById('appUser').value = 'yes';
+                            break;
+                        case 'c':
+                            document.getElementById('lastVisitDays').value = '90';
+                            document.getElementById('halfYearVisits').value = '2';
+                            document.getElementById('halfYearSpending').value = '800';
+                            document.getElementById('appUser').value = 'no';
+                            break;
+                    }
+                    
+                    // Trigger validation feedback
+                    inputs.forEach(input => input.dispatchEvent(new Event('input')));
+                    
+                    // Auto-analyze after a short delay
+                    setTimeout(() => {
+                        analyzeBtn.click();
+                    }, 300);
+                });
+            });
+            
+            // Initialize with a sample analysis on page load
+            setTimeout(() => {
+                // Set default values if they're still the defaults
+                const lastVisitDays = document.getElementById('lastVisitDays').value;
+                if (lastVisitDays === '15') {
+                    analyzeBtn.click();
+                }
+            }, 1000);
+        });
+    </script>
+    
+    <!-- Service Worker Registration for PWA -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('sw.js').then(function(registration) {
+                    console.log('ServiceWorker 註冊成功，範圍: ', registration.scope);
+                }, function(err) {
+                    console.log('ServiceWorker 註冊失敗: ', err);
+                });
+            });
+        }
+    </script>
+    
+    <!-- Analytics/Telemetry (optional) -->
+    <script>
+        // Basic usage analytics
+        window.addEventListener('load', function() {
+            console.log('茶言觀色會員優化工具已載入完成');
+            
+            // Track button clicks
+            document.querySelectorAll('button').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    console.log('按鈕點擊:', this.textContent.trim());
+                });
+            });
+            
+            // Track form submissions
+            document.getElementById('memberForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                console.log('表單提交嘗試');
             });
         });
     </script>
